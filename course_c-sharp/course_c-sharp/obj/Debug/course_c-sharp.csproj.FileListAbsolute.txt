@@ -1,7 +1,0 @@
-C:\Users\Nikto\source\repos\course_c-sharp\course_c-sharp\bin\Debug\course_c-sharp.exe.config
-C:\Users\Nikto\source\repos\course_c-sharp\course_c-sharp\bin\Debug\course_c-sharp.exe
-C:\Users\Nikto\source\repos\course_c-sharp\course_c-sharp\bin\Debug\course_c-sharp.pdb
-C:\Users\Nikto\source\repos\course_c-sharp\course_c-sharp\obj\Debug\course_c-sharp.csprojAssemblyReference.cache
-C:\Users\Nikto\source\repos\course_c-sharp\course_c-sharp\obj\Debug\course_c-sharp.csproj.CoreCompileInputs.cache
-C:\Users\Nikto\source\repos\course_c-sharp\course_c-sharp\obj\Debug\course_c-sharp.exe
-C:\Users\Nikto\source\repos\course_c-sharp\course_c-sharp\obj\Debug\course_c-sharp.pdb

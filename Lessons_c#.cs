@@ -66,6 +66,33 @@ namespace new_project
             */
             // очистка консоли - Console.Clear()
             // задать цвет - Console.ForegroundColor = ConsoleColor.Red;
+			
+			// одномерные массивы 
+            /*
+            int[] mass;
+            mass = new int[5];
+            int size = mass.Length; // размер массива
+            int[] new_mass = Enumerable.Repeat(5, 10).ToArray(); // инициализация массива определённым значениями (значения, количество)
+            int[] new_mass2 = Enumerable.Range(1, 8).ToArray(); // инициализация массива с определённого значения (начальное значение, количество)
+
+            int result = new_mass.Max(); // max элемент в массиве
+            int result2 = new_mass.Min(); // min элемент в массиве
+            int sum = new_mass.Sum(); // сумма всех элементов в массиве
+            int sum_chet = new_mass.Where(i => i % 2 == 0).Sum(); // сумма всех чётных элементов в массиве
+
+            int[] arr = new_mass.Distinct().ToArray(); // в массив arr добавяться только уникальные элементы из массива new_mass
+            int[] arr2 = new_mass.OrderBy(i => i).ToArray(); // массив arr - это отсортированный массив new_mass в порядке возрастания
+            int[] arr3 = new_mass.OrderByDescending(i => i).ToArray(); // массив arr - это отсортированный массив new_mass в порядке убывания
+
+            Array.Sort(new_mass); // сортировка массива
+            int result3 = Array.Find(new_mass, i => i < 5); // (массив, условие поиска) - первый элемент который удовлетворит условию будет помещён в переменную result
+            int result4 = Array.FindLast(new_mass, i => i < 5); // тоже самое только поиск начинается с конца
+            int [] res_mass = Array.FindAll(new_mass, i => i < 5); // тоже самое но возвращает массив
+            int index = Array.FindIndex(new_mass, i => i == 77); // возвращает индекс элемента который удовлетворяет условию
+            int index2 = Array.FindLastIndex(new_mass, i => i == 77); // с конца
+
+            Array.Reverse(new_mass); // преобразует массив так, что элементы в нём будут в обратном порядке
+            */
         }
     }
 }
