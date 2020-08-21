@@ -93,6 +93,134 @@ namespace new_project
 
             Array.Reverse(new_mass); // преобразует массив так, что элементы в нём будут в обратном порядке
             */
+			// индексы и диапозоны (пока только .Net Core)
+            /*
+            int[] MyArray = { 2, 10, 5, 6, 77, 89 };
+                       
+            Console.WriteLine(MyArray[^1]); // получаем первый элемент с конца массива
+
+            int[] Myarray2 = MyArray[1..4]; // задаём диапозон чисел которые хотим извлечь
+            */
+			
+			// двумерный массив
+            /*
+            int[,] mass;
+            mass = new int[4, 5];
+            mass[0, 2] = 5;
+
+            Random random = new Random();
+            for (int i = 0; i < mass.GetLength(0); i++)
+            {
+                for (int j = 0; j < mass.GetLength(1); j++)
+                {
+                    mass[i, j] = random.Next(100);
+                }
+            }
+
+            foreach (var item in mass)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            // .GetLenght(0) - возвращает кол-во элементов определённого измерения
+            //т.е. если (0) то получаем количество элементов в первом измерении (по вертикали, т.е. колв-во строк), если (1) то во втором
+            // (по горизонтали, т.е. кол-во столбцов)
+            for (int i = 0; i < mass.GetLength(0); i++) 
+            {
+                for (int j  = 0; j < mass.GetLength(1); j++)
+                {
+                    Console.Write($"{mass[i, j]} ");
+                }
+                Console.WriteLine();
+            }
+            */
+			
+			 // ступенчатые(зубчатые) массивы
+            /*
+            int[][] mass = new int[3][];
+            mass[0] = new int[5];
+            mass[1] = new int[2];
+            mass[2] = new int[10];
+            Random random = new Random();
+
+            for (int i = 0; i < mass.Length; i++)
+            {
+                for (int j = 0; j < mass[i].Length; j++)
+                {
+                    mass[i][j] = random.Next(100);
+                }
+            }
+
+            for (int i = 0; i < mass.Length; i++)
+            {
+                for (int j = 0; j < mass[i].Length; j++)
+                {
+                    Console.Write(mass[i][j] + " ");
+                }
+                Console.WriteLine();
+            }
+            */
+			
+			// трёхмерный массив
+            /*
+            int[,,] mass = new int[4, 3, 5]; // [z, y, x]
+            Random rand = new Random();
+            for (int z = 0; z < mass.GetLength(0); z++)
+            {
+                for (int y = 0; y < mass.GetLength(1); y++)
+                {
+                    for (int x = 0; x < mass.GetLength(2); x++)
+                    {
+                        mass[z, y, x] = rand.Next(100);
+                    }
+                }
+            }
+
+            for (int z = 0; z < mass.GetLength(0); z++)
+            {
+                for (int y = 0; y < mass.GetLength(1); y++)
+                {
+                    for (int x = 0; x < mass.GetLength(2); x++)
+                    {
+                        Console.Write(mass[z, y, x] + " ");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
+            */
+
+			// трёхмерные зубчтатые массивы
+            /*
+            Random random = new Random();
+            int[][][] mass = new int[random.Next(2,5)][][];
+            for (int z = 0; z < mass.Length; z++)
+            {
+                mass[z] = new int[random.Next(2, 5)][];
+                for (int y = 0; y < mass[z].Length; y++)
+                {
+                    mass[z][y] = new int[random.Next(2, 5)];
+                    for (int x = 0; x < mass[z][y].Length; x++)
+                    {
+                        mass[z][y][x] = random.Next(100);
+                    }
+                }
+            }
+
+            for (int z = 0; z < mass.Length; z++)
+            {
+                for (int y = 0; y < mass[z].Length; y++)
+                {
+                    for (int x = 0; x < mass[z][y].Length; x++)
+                    {
+                        Console.Write(mass[z][y][x] + " ");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
+            */
+
         }
     }
 }
