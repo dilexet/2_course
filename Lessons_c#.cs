@@ -5,6 +5,17 @@ namespace new_project
 {
     class Program
     {
+		// ключевое слово ref - т.е. ссылка
+        /*
+        static void Foo(ref int a)
+        {
+            a++;
+        }
+        static void Bar(ref int[] arr)
+        {
+            arr = new int[10];
+        }
+        */
         static void Main(string[] args)
         {
             // конвертация строки, class Convert
@@ -220,7 +231,42 @@ namespace new_project
                 Console.WriteLine();
             }
             */
+			// оператор null- обЬединения ??
+            /*
+             * string str = null;
+            Console.WriteLine(str ?? "не данных"); // установка default-ного значения
+            string result = str ?? "default"; // если в str есть данные то в result будут записаны те самые данные иначе будет присвоено default-ное значение
+            */
+            // оператор присваивания null- обЬединения ??=
+            /*
+             * string str2 = null;
+            str2 ??= string.Empty; // присваивает пустую строку
+            Console.WriteLine("Количество символов в строке " + str2.Length);
+            str2 ??= "default";
+            Console.WriteLine("Количество символов в строке " + str2.Length);
+            int[] array = null;
+            int[] mass = array;
+            mass ??= new int[0]; // если массив указывает на null то будет создан массив на 0 элементов
+            */
+            // оператор условного null
+			/*
+            int[] array2 = null;
+            int[] mass2 = array2;
+            Console.WriteLine("Сумма элементов массива " + (mass2?.Sum() ?? 0)); // если массив указывает на Null, то метод стоящий после ? не выполниться и выведется 0
+			*/
+			 // ключевое слово ref - т.е. ссылка
+            /*
+            int a = 5;
+            Foo(ref a);
+            Console.WriteLine(a);
 
-        }
+            int[] arr = { 1, 2, 3 };
+            ref int b = ref arr[0]; // изменив b измениться и значение массива
+            b = 4;
+            Bar(ref arr); // чтобы рабоать со значениями массива, необязательно передавать его по ссылке
+            // но обязательно чтобы работать с самой ссылкой
+            */
+			
+	   }
     }
 }
