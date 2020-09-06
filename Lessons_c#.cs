@@ -52,7 +52,7 @@ namespace new_project
         /// <typeparam name="T"></typeparam>
         /// <param name="mass"></param>
         /// <param name="index"></param>
-        static void Index_delete<T>(ref T[] mass, int index)
+        static void RemoveAt<T>(ref T[] mass, int index)
         {
             T[] new_mass = new T[mass.Length - 1];
             for (int i = 0; i < index; i++)
@@ -300,6 +300,9 @@ namespace new_project
             Console.WriteLine("Сумма элементов массива " + (mass2?.Sum() ?? 0)); // если массив указывает на Null, то метод стоящий после ? не выполниться и выведется 0
 			*/
 			 // ключевое слово ref - т.е. ссылка
+			 // ключевое слово out работает так же как ref, только если передавая значением через ref мы не обязаны его изменять значение,
+			 // то при использовании out мы обязаны как-то взаимодействовать с переменной 
+			 // ключевое слово in - вообще не позволяет изменять данные, перемееная пригодна только для чтения(даёт выигрышь во времени выполнения кода)
             /*
             int a = 5;
             Foo(ref a);
