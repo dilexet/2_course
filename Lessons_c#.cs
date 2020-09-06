@@ -16,7 +16,52 @@ namespace new_project
             arr = new int[10];
         }
         */
-        static void Main(string[] args)
+        /// <summary>
+        /// Изменяет размер массива
+        /// </summary>
+        /// <param name="mass"></param>
+        /// <param name="size"></param>
+        static void Resize<T>(ref T[] mass, int size)
+        {
+            T[] arr = new T[size];
+            for (int i = 0; i < mass.Length && i < arr.Length; i++) 
+            {
+                 arr[i] = mass[i];
+            }
+            mass = arr;
+        }
+		 /// <summary>
+        /// Добавление элемента в массив по индексу
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="data"></param>
+        /// <param name="index"></param>
+        static void Insert<T>(ref T[] arr, T data, int index)
+        {
+            T[] mass = new T[arr.Length + 1];
+            mass[index] = data;
+            for (int i = 0; i < index; i++)
+                mass[i] = arr[i];
+            for (int i = index; i < arr.Length; i++)
+                mass[i + 1] = arr[i];
+            arr = mass;
+        }
+		/// <summary>
+        /// Удаление элемента в массиве по индексу
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="mass"></param>
+        /// <param name="index"></param>
+        static void Index_delete<T>(ref T[] mass, int index)
+        {
+            T[] new_mass = new T[mass.Length - 1];
+            for (int i = 0; i < index; i++)
+                new_mass[i] = mass[i];
+            for (int i = index + 1; i < mass.Length; i++)
+                new_mass[i - 1] = mass[i];
+            mass = new_mass;
+        }
+		static void Main(string[] args)
         {
             // конвертация строки, class Convert
             /*
