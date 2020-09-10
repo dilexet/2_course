@@ -7,7 +7,7 @@ using Student_library;
 
 namespace Student_projects
 {
-    enum CardType
+    enum CardsType
     {
         Invalid = 0,
         MasterCard,
@@ -35,11 +35,15 @@ namespace Student_projects
         {
             return (int)(card_number / Math.Pow(10, GetDigitsCount(card_number) - 1 - index) % 10);
         }
-
+        /// <summary>
+        /// Проверка карты на валидность
+        /// </summary>
+        /// <param name="card_number"></param>
+        /// <returns></returns>
         public static bool CardCheck(long card_number)
         {
             int degits_count = GetDigitsCount(card_number);
-            int sum = 0;
+            int sum_of_digits = 0;
             if (degits_count % 2 != 0) 
                 for (int i = 0; i < degits_count; i++)
                 {
@@ -48,7 +52,7 @@ namespace Student_projects
                         current_digit *= 2;
                     if (current_digit > 9)
                         current_digit = current_digit / 10 + current_digit % 10;
-                    sum += current_digit;
+                    sum_of_digits += current_digit;
                 }
             else
                 for (int i = 0; i < degits_count; i++)
@@ -58,18 +62,24 @@ namespace Student_projects
                         current_digit *= 2;
                     if (current_digit > 9)
                         current_digit = current_digit / 10 + current_digit % 10;
-                    sum += current_digit;
+                    sum_of_digits += current_digit;
                 }
-            if (sum == 0)
+            if (sum_of_digits == 0)
                 return false;
         
-            return sum % 10 == 0;
+            return sum_of_digits % 10 == 0;
         }
        
     }
-    class Cards
+    class CardType
     {
-        public static string GetCardType(long card_number, New_Cards[] cards)
+        /// <summary>
+        /// Возвращает тип карточки
+        /// </summary>
+        /// <param name="card_number"></param>
+        /// <param name="cards"></param>
+        /// <returns></returns>
+        public static string GetCardType(long card_number, NewCard[] cards)
         {                
             int digitsCount = Invalid.GetDigitsCount(card_number);
             int digit1 = Invalid.GetDigit(card_number, 0);
@@ -97,23 +107,23 @@ namespace Student_projects
                 }
             return "Invalid";
         }
-        
-
     }
-    struct New_Cards
+    struct NewCard
     {
         public string cardtype;
         public int digit1;
         public int digit2;
         public uint digitsCount;
     }
-    
-
-class Program
+    class Program
     {
-        static New_Cards[] push_back()
+        /// <summary>
+        /// Возвращает массив с новой картой
+        /// </summary>
+        /// <returns></returns>
+        static NewCard[] CreationNewCard()
         {
-            New_Cards[] temp_cards = new New_Cards[1];
+            NewCard[] temp_cards = new NewCard[1];
 
             Console.Write("Введит название карточки: ");
             temp_cards[0].cardtype = Console.ReadLine();
@@ -135,16 +145,21 @@ class Program
             }
             return temp_cards;
         }
-        static void push(ref New_Cards[] cards, New_Cards[] temp_cards)
+        /// <summary>
+        /// Добавление новой карточки в массив
+        /// </summary>
+        /// <param name="cards"></param>
+        /// <param name="temp_cards"></param>
+        static void AddingNewCard(ref NewCard[] cards, NewCard[] temp_cards)
         {
             if (cards == null)
             {
-                cards = new New_Cards[1];
+                cards = new NewCard[1];
                 cards = temp_cards;
             } 
             else
             {
-                New_Cards[] zadolbalca_cards = new New_Cards[cards.Length + 1];
+                NewCard[] zadolbalca_cards = new NewCard[cards.Length + 1];
                 zadolbalca_cards[cards.Length] = temp_cards[0];
                 for (int i = 0; i < cards.Length; i++)
                 {
@@ -153,17 +168,11 @@ class Program
                 cards = zadolbalca_cards;
             }
         }
-        static void Print(New_Cards[] cards)
-        {
-            foreach (var item in cards)
-            {
-                Console.WriteLine("Название: {0}\nРазмер: {1}\nПервая цифра: {2}\nВторая цифра: {3}", item.cardtype, item.digitsCount, item.digit1, item.digit2);
-            }
-        }
+       
 
         static void Main(string[] args)
         {
-            New_Cards[] cards = null;
+            NewCard[] cards = null;
             ConsoleKey consoleKey;
             do
             {
@@ -178,14 +187,14 @@ class Program
                         Console.Write("Введите номер карточки:\t");
                         long.TryParse(Console.ReadLine(), out long number_cards);
 
-                        string cardType = Cards.GetCardType(number_cards, cards);
+                        string cardType = CardType.GetCardType(number_cards, cards);
 
                         Console.WriteLine("card_type -- " + cardType);
 
                         Console.WriteLine("Прошла ли карта идентификацию: " + (Invalid.CardCheck(number_cards) ? "YES" : "NO"));
                         break;
                     case ConsoleKey.D2:
-                        push(ref cards, push_back());
+                        AddingNewCard(ref cards, CreationNewCard());
                         break;
                     default:
                         Console.WriteLine("Операция выбрана не верно");
@@ -194,6 +203,17 @@ class Program
                 Console.WriteLine("\n");
             } while (consoleKey != ConsoleKey.D0);
             
+        }
+        /// <summary>
+        /// Вывод массива с новыми карточками(используется для тестов)
+        /// </summary>
+        /// <param name="cards"></param>
+        static void Print(NewCard[] cards)
+        {
+            foreach (var item in cards)
+            {
+                Console.WriteLine("Название: {0}\nРазмер: {1}\nПервая цифра: {2}\nВторая цифра: {3}", item.cardtype, item.digitsCount, item.digit1, item.digit2);
+            }
         }
     }
 }
