@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using Student_library;
 
@@ -143,7 +144,38 @@ namespace Student_projects
                 int.TryParse(Convert.ToString(digit[0]), out temp_cards[0].digit1);
                 int.TryParse(Convert.ToString(digit[1]), out temp_cards[0].digit2);
             }
+            InputFile(temp_cards);
             return temp_cards;
+        }
+        /// <summary>
+        /// Запись массива в файл
+        /// </summary>
+        /// <param name="temp_cards"></param>
+        static void InputFile(NewCard[] temp_cards)
+        {
+            string path = @"C:\Users\Nikto\source\repos\Student_projects\Student_projects\number_cards.txt";
+            string data = temp_cards[0].cardtype + " " + Convert.ToString(temp_cards[0].digitsCount) + " " + Convert.ToString(temp_cards[0].digit1) + " " + Convert.ToString(temp_cards[0].digit2);
+            using (FileStream file = new FileStream(path, FileMode.Append))
+            {
+                using (StreamWriter write = new StreamWriter(file))
+                {
+                    write.WriteLine(data);
+                }
+
+            }
+        }
+        /// <summary>
+        /// Чтени из файла и запись в массив
+        /// </summary>
+        /// <param name="cards"></param>
+        static void Output(ref NewCard[] cards)
+        {
+            string path = @"C:\Users\Nikto\source\repos\Student_projects\Student_projects\number_cards.txt";
+            string[] arr_data = File.ReadAllLines(path);
+            foreach (string data in arr_data)
+            {
+                AddingNewCard(ref cards, data);
+            }
         }
         /// <summary>
         /// Добавление новой карточки в массив
@@ -168,7 +200,39 @@ namespace Student_projects
                 cards = zadolbalca_cards;
             }
         }
-       
+        /// <summary>
+        /// Добавление карточки в массив из строки
+        /// </summary>
+        /// <param name="cards"></param>
+        /// <param name="data"></param>
+        static void AddingNewCard(ref NewCard[] cards, string data)
+        {
+
+            string[] arr_data = data.Split(' ');
+            if (cards == null)
+            {
+                cards = new NewCard[1];
+                cards[0].cardtype = arr_data[0];
+                cards[0].digitsCount = uint.Parse(arr_data[1]);
+                cards[0].digit1 = int.Parse(arr_data[2]);
+                cards[0].digit2 = int.Parse(arr_data[3]);
+
+            }
+            else
+            {
+                NewCard[] zadolbalca_cards = new NewCard[cards.Length + 1];
+                zadolbalca_cards[cards.Length].cardtype = arr_data[0];
+                zadolbalca_cards[cards.Length].digitsCount = uint.Parse(arr_data[1]);
+                zadolbalca_cards[cards.Length].digit1 = int.Parse(arr_data[2]);
+                zadolbalca_cards[cards.Length].digit2 = int.Parse(arr_data[3]);
+                for (int i = 0; i < cards.Length; i++)
+                {
+                    zadolbalca_cards[i] = cards[i];
+                }
+                cards = zadolbalca_cards;
+            }
+        }
+
 
         static void Main(string[] args)
         {
@@ -176,7 +240,7 @@ namespace Student_projects
             ConsoleKey consoleKey;
             do
             {
-                Console.WriteLine("Выберите операцию:\n\n0. Выход;\n1. Работа с существующей карточкой;\n2. Создать новую карточку;\n");
+                Console.WriteLine("Выберите операцию:\n\n0. Выход;\n1. Работа с существующей карточкой;\n2. Создать новую карточку;\n3. Взять данные карты из файла\n");
                 consoleKey = Console.ReadKey().Key;
                 Console.Clear();
                 switch (consoleKey)
@@ -196,6 +260,9 @@ namespace Student_projects
                     case ConsoleKey.D2:
                         AddingNewCard(ref cards, CreationNewCard());
                         break;
+                    case ConsoleKey.D3:
+                        Output(ref cards);
+                        break;
                     default:
                         Console.WriteLine("Операция выбрана не верно");
                         break;
@@ -203,7 +270,10 @@ namespace Student_projects
                 Console.WriteLine("\n");
             } while (consoleKey != ConsoleKey.D0);
             
+
         }
+
+
         /// <summary>
         /// Вывод массива с новыми карточками(используется для тестов)
         /// </summary>
