@@ -9,7 +9,7 @@ namespace Student_projects
 {
     class Program
     {
-		 static double Sum_num_1_laba3(int[] array)
+        static double Sum_num_1_laba3(int[] array)
         {
             double sum = 0;
             foreach (var item in array)
@@ -25,7 +25,7 @@ namespace Student_projects
             MyArray.one_dimensional_array_generation(array);
             Console.WriteLine("Исходные массив: ");
             MyArray.one_dimensional_array_output(array);
-            Console.WriteLine("Сумма чётных элементов равна: " + Sum_num_1_laba3(array));
+            Console.WriteLine("Сумма квадратов чётных элементов равна: " + Sum_num_1_laba3(array));
         }
         static int Finding_the_min_element_num_2_laba3(int[] array)
         {
@@ -93,7 +93,7 @@ namespace Student_projects
                 matrix = array;
             return matrix;
         }
-        static void num_3_laba_3()
+        static void num_3_laba3()
         {
             Console.Write("Введите размер массива: ");
             uint.TryParse(Console.ReadLine(), out uint size);
@@ -112,7 +112,32 @@ namespace Student_projects
         }
         static void Main(string[] args)
         {
-
+            ConsoleKey consoleKey;
+            
+            do
+            {
+                Console.Write("Введите номер задания или 0 - для выхода: ");
+                consoleKey = Console.ReadKey().Key;
+                Console.Clear();
+                switch (consoleKey)
+                {
+                    case ConsoleKey.D0:
+                        break;
+                    case ConsoleKey.D1:
+                        num_1_laba3();
+                        break;
+                    case ConsoleKey.D2:
+                        num_2_laba3();
+                        break;
+                    case ConsoleKey.D3:
+                        num_3_laba3();
+                        break;
+                    default:
+                        Console.WriteLine("Error");
+                        break;
+                }
+                Console.WriteLine("\n");
+            } while (consoleKey != ConsoleKey.D0);
         }
-	}
+    }
 }
