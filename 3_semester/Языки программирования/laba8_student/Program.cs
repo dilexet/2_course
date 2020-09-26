@@ -58,9 +58,24 @@ namespace Student_projects
                     }
                 }
             }
-            Console.WriteLine("Операция прошла успешно");
+            
         }
+        /// <summary>
+        /// Выделение памяти под массив
+        /// </summary>
+        /// <param name="students"></param>
+        public static void ArrayCreation(ref Student[] students)
+        {
+            string path = @"C:\Users\Nikto\source\repos\Student_projects\Student_projects\Student.txt";
+            string[] arr_data = File.ReadAllLines(path);
 
+            if (arr_data.Length == 0)
+            {
+                Console.WriteLine("Данных нет!");
+                return;
+            }
+            students = new Student[arr_data.Length];
+        }
         /// <summary>
         /// Заполняет Student данными о ФИО
         /// </summary>
@@ -82,7 +97,6 @@ namespace Student_projects
                 students[i].Surname = student[0];
                 students[i].Name = student[1];
             }
-            Console.WriteLine("Операция прошла успешно");
         }
 
         /// <summary>
@@ -91,6 +105,11 @@ namespace Student_projects
         /// <param name="students"></param>
         public static void SavingВata(Student[] students)
         {
+            if (students == null || students.Length == 0)
+            {
+                Console.WriteLine("Список пуст");
+                return;
+            }
             string path3 = @"C:\Users\Nikto\source\repos\Student_projects\Student_projects\stud_lab.bin";
             try
             {
@@ -121,16 +140,23 @@ namespace Student_projects
         /// Восстановление данных с бинарного файла
         /// </summary>
         /// <param name="students"></param>
-        public static void RecoveryData(Student[] students)
+        public static void RecoveryData(ref Student[] students)
         {
             string path3 = @"C:\Users\Nikto\source\repos\Student_projects\Student_projects\stud_lab.bin";
-            OutputStudent(ref students);
-            OutputLaboratory(ref students);
+            
             try
             {
                 using (BinaryReader reader = new BinaryReader(File.Open(path3, FileMode.Open)))
                 {
+                    
+                    if (!(reader.PeekChar() > -1))
+                    {
+                        Console.WriteLine("Файл пуст");
+                        return;
+                    }
                     int k = 0;
+                    ArrayCreation(ref students);
+                    OutputLaboratory(ref students);
                     while (reader.PeekChar() > -1)
                     {
                         students[k].Name = reader.ReadString();
@@ -160,7 +186,7 @@ namespace Student_projects
         /// <param name="students"></param>
         public static void StudentsProgressList(Student[] students)
         {
-            if (students == null || students.Length == 0)
+            if (students == null)
             {
                 Console.WriteLine("Список пуст");
                 return;
@@ -168,7 +194,7 @@ namespace Student_projects
             CalculatingAverageGrade(ref students);
             foreach (var item in students)
             {
-                Console.WriteLine("№Lab" + "\tСредний балл\t" + item.Surname + " " + item.Name);
+                Console.WriteLine("№Lab" + "\tСредний балл\t" + (item.Surname ?? "No") + " " + (item.Name ?? "Name"));
                 for (int i = 0; i < item.laboratory.Length; i++)
                 {
                     Console.Write("{0}\t{1:0.000}\t\t", i + 1, item.AverageGrade[i]);
@@ -196,7 +222,7 @@ namespace Student_projects
             int indexStudent = 1;
             foreach (var item in students)
             {
-                Console.WriteLine("№ " + indexStudent + "\t" + item.Surname + " " + item.Name);
+                Console.WriteLine("№ " + indexStudent + "\t" + (item.Surname ?? "No") + " " + (item.Name ?? "Name"));
                 indexStudent++;
             }
         }
@@ -377,6 +403,11 @@ namespace Student_projects
         /// <param name="students"></param>
         public static void DeleteLastTask(ref Student[] students)
         {
+            if (students == null || students.Length == 0)
+            {
+                Console.WriteLine("Список пуст");
+                return;
+            }
             Student[] temp_students = new Student[students.Length];
             for (int i = 0; i < temp_students.Length; i++)
             {
@@ -412,7 +443,7 @@ namespace Student_projects
             ConsoleKey consoleKey;
             do
             {
-                Console.WriteLine("\n0. Восстановаить данные;\n1. Считать данные о студентах;\n2. Считать данные о лабораторных;\n3. Заполнить оценки рандомом;" +
+                Console.WriteLine("\n0. Восстановить данные;\n1. Считать данные о студентах;\n2. Считать данные о лабораторных;\n3. Заполнить оценки рандомом;" +
                     "\n4. Вывести список студентов и успеваемость;\n5. Вывести список студентов;\n6. Список сданных работ студента;\n" +
                     "7. Таблица успеваемости студента;\n8. Ввести данные о лабораторных\n9. Сохранить данные в бинарном виде;" +
                     "\nQ. Удалить последнее задание в каждой лабе;\nESC. Выход;\n");
@@ -450,7 +481,7 @@ namespace Student_projects
                         work_with_file.SavingВata(students);
                         break;
                     case ConsoleKey.D0:
-                        work_with_file.RecoveryData(students);
+                        work_with_file.RecoveryData(ref students);
                         break;
                     case ConsoleKey.Q:
                         work_with_student.DeleteLastTask(ref students);
