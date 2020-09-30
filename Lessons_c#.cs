@@ -61,6 +61,16 @@ namespace new_project
                 new_mass[i - 1] = mass[i];
             mass = new_mass;
         }
+		 // Ключевое слово params
+        static int Sum(params int[] parameers) // можем передавать различное количество параметров
+        {
+            int result = 0;
+            for (int i = 0; i < parameers.Length; i++)
+            {
+                result += parameers[i];
+            }
+            return result;
+        }
 		static void Main(string[] args)
         {
             // конвертация строки, class Convert

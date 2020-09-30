@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Student_library;
 using System.Text.RegularExpressions;
 using System.Data.SqlTypes;
 using System.Runtime.InteropServices.ComTypes;
@@ -18,6 +17,32 @@ namespace Student_projects
 {
     class Text
     {
+        private String[] GetAllText()
+        {
+            string path = @"C:\Users\Nikto\source\repos\Student_projects\Student_projects\text_analysis.txt";
+            String[] allText = File.ReadAllLines(path);
+            return allText;
+        }
+        private String GetPageNumber(String item)
+        {
+            String[] allText = GetAllText();
+            char[] separator = { ',', '.', ' ', '?', '!', ';' };
+            String pageNumber = "";
+            int countline = 60;
+            int page = 1;
+            for (int i = 0; i < allText.Length; i++)
+            {
+                countline--;
+                if (Regex.IsMatch(allText[i].ToLower(), item))
+                {
+                    pageNumber += page + "\t";
+                    i += countline;
+                    countline = 60;
+                    page++;
+                }
+            }
+            return pageNumber;
+        }
         public void ReadingText(List<String> list)
         {
             String path = @"C:\Users\Nikto\source\repos\Student_projects\Student_projects\text_analysis.txt";
@@ -37,6 +62,23 @@ namespace Student_projects
             }
 
         }
+        private int CountLetter(String item)
+        {
+            int countLetter = 0;
+            int countline = 60;
+            String[] allText = GetAllText();
+            for (int i = 0; i < allText.Length; i++)
+            {
+                countline--;
+                if (Regex.IsMatch(allText[i].ToLower(), item))
+                {
+                    countLetter++;
+                    i += countline;
+                    countline = 60;
+                }
+            }
+            return countLetter;
+        }
         private void WritingText(List<String> listWords, List<String> list)
         {
             string path = @"C:\Users\Nikto\source\repos\Student_projects\Student_projects\text_processed.txt";
@@ -47,6 +89,7 @@ namespace Student_projects
                     const char dot = '.';
                     const int countDot = 50;
                     String letter = "";
+                    
                     foreach (var item in listWords)
                     {
                         if (letter.ToLower() != item[0].ToString())
@@ -57,8 +100,8 @@ namespace Student_projects
                         sw.Write(item);
                         for (int i = 0; i < countDot - item.Length; i++)
                             sw.Write(dot);
-                        sw.Write(list.Where(x => x == item).Count());
-                        sw.WriteLine(":");
+                        sw.Write(CountLetter(item));
+                        sw.WriteLine(": " + GetPageNumber(item));
                     }
                 }
             }
@@ -75,7 +118,15 @@ namespace Student_projects
         private void SortText(List<String> list)
         {
             list.Sort();
+
             var listWords = list.Distinct().ToList();
+            listWords.Sort((s1,s2)=>
+            {
+                int compasion = s1[0].CompareTo(s2[0]);
+                if (compasion == 0)
+                    return s1.Length - s2.Length;
+                return compasion;
+            });
             WritingText(listWords, list);
         }
         private String GetLetter(String item)
@@ -145,7 +196,8 @@ namespace Student_projects
             Console.Write("Введите текст: ");
             StringBuilder text = new StringBuilder(Console.ReadLine());
             string reg = @"[a-zA-Z]+";
-            Console.WriteLine(Regex.Replace(text.ToString(), reg, ""));
+            
+            Console.WriteLine(Regex.Replace(text.ToString(), reg, "..."));
         }
         static public void num_6()
         {
@@ -242,10 +294,9 @@ namespace Student_projects
             List<String> list = new List<string>();
             text.ReadingText(list);
         }
-       
         static void Main(string[] args)
         {
-            
+            Task_2();
         }
     }
 }
