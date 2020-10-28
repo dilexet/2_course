@@ -1,0 +1,11 @@
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\bin\Debug\Questionnaire.exe.config
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\bin\Debug\Questionnaire.exe
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\bin\Debug\Questionnaire.pdb
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.Form1.resources
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.Properties.Resources.resources
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.csproj.GenerateResource.cache
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.csproj.CoreCompileInputs.cache
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.exe
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.pdb
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.AnketaDB.resources
+C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\bin\Debug\Anketa.accdb

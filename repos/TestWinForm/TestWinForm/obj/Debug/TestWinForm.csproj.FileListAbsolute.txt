@@ -1,0 +1,11 @@
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\bin\Debug\Client.accdb
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\bin\Debug\TestWinForm.exe.config
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\bin\Debug\TestWinForm.exe
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\bin\Debug\TestWinForm.pdb
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\obj\Debug\TestWinForm.csprojAssemblyReference.cache
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\obj\Debug\TestWinForm.Form1.resources
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\obj\Debug\TestWinForm.Properties.Resources.resources
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\obj\Debug\TestWinForm.csproj.GenerateResource.cache
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\obj\Debug\TestWinForm.csproj.CoreCompileInputs.cache
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\obj\Debug\TestWinForm.exe
+C:\Users\Nikto\source\repos\TestWinForm\TestWinForm\obj\Debug\TestWinForm.pdb
