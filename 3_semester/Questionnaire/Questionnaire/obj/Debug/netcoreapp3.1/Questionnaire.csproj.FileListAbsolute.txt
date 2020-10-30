@@ -1,0 +1,15 @@
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\bin\Debug\netcoreapp3.1\Questionnaire.exe
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\bin\Debug\netcoreapp3.1\Questionnaire.deps.json
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\bin\Debug\netcoreapp3.1\Questionnaire.runtimeconfig.json
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\bin\Debug\netcoreapp3.1\Questionnaire.runtimeconfig.dev.json
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\bin\Debug\netcoreapp3.1\Questionnaire.dll
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\bin\Debug\netcoreapp3.1\Questionnaire.pdb
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.csprojAssemblyReference.cache
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.AssemblyInfoInputs.cache
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.AssemblyInfo.cs
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.csproj.CoreCompileInputs.cache
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.dll
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.pdb
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.genruntimeconfig.cache
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.Form1.resources
+C:\Users\dilexet\RiderProjects\Questionnaire\Questionnaire\obj\Debug\netcoreapp3.1\Questionnaire.csproj.GenerateResource.cache

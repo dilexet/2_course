@@ -217,7 +217,7 @@ namespace Questionnaire
 
         private void InFile(String text)
         {
-            string writePath = @"C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\anketa.txt";
+            string writePath = "anketa.txt";
             try
             {
                 using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))

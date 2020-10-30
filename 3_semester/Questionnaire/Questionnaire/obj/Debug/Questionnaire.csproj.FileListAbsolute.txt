@@ -9,3 +9,5 @@ C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.
 C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.pdb
 C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\obj\Debug\Questionnaire.AnketaDB.resources
 C:\Users\Nikto\source\repos\Questionnaire\Questionnaire\bin\Debug\Anketa.accdb
+C:\Users\dilexet\Documents\GitHub\2_course\3_semester\Questionnaire\Questionnaire\obj\Debug\Questionnaire.exe
+C:\Users\dilexet\Documents\GitHub\2_course\3_semester\Questionnaire\Questionnaire\obj\Debug\Questionnaire.pdb
