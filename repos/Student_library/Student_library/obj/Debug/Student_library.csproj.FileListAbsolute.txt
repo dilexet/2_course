@@ -1,0 +1,6 @@
+C:\Users\Nikto\source\repos\Student_library\Student_library\bin\Debug\Student_library.dll
+C:\Users\Nikto\source\repos\Student_library\Student_library\bin\Debug\Student_library.pdb
+C:\Users\Nikto\source\repos\Student_library\Student_library\obj\Debug\Student_library.csproj.CoreCompileInputs.cache
+C:\Users\Nikto\source\repos\Student_library\Student_library\obj\Debug\Student_library.dll
+C:\Users\Nikto\source\repos\Student_library\Student_library\obj\Debug\Student_library.pdb
+C:\Users\Nikto\source\repos\Student_library\Student_library\obj\Debug\Student_library.csprojAssemblyReference.cache
