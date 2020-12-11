@@ -47,7 +47,7 @@ namespace Task_1
 
             return itemMatrix.Max();
         }
-        static void Main(string[] args)
+        static void Main()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
