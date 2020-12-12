@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Task_2
+namespace Task_2_AND_3
 {
     class Application
     {
@@ -34,15 +34,15 @@ namespace Task_2
  
             // Create and init.
             // Объявляем и инициализимруем классы.
-            Seidel i = new Seidel(matrix, additional, 0.0001);
-            Jacobi j = new Jacobi(matrix, additional, 0.0001);
+            Seidel seidel = new Seidel(matrix, additional, 0.0001);
+            Jacobi jacobi = new Jacobi(matrix, additional, 0.0001);
  
             // set method args of ThreadStart delegate 
             // Передаем методы потоку через делегат ThreadStart
             Thread z = new Thread(
-                i.CalculateMatrix);
+                seidel.CalculateMatrix);
             Thread y = new Thread(
-                j.CalculateMatrix);
+                jacobi.CalculateMatrix);
  
             // Start threads
             // Запускаем потоки.
@@ -57,21 +57,13 @@ namespace Task_2
             // Show results of calculations 
             // Выводим на экран.
             Console.WriteLine("\n Seidel method:");
-            ShowMatrix(i.ResultMatrix, matrix);
+            ShowMatrix(seidel.ResultMatrix, matrix);
             Console.WriteLine("\n Jakobi method:");
-            ShowMatrix(j.ResultMatrix, matrix);
+            ShowMatrix(jacobi.ResultMatrix, matrix);
             
         }
  
-        //------------------------------------------
-        // setVal - method of array values enter overloads 
-        // setVal - Перегрузки методов ввода значений для
-        // матрицы коеффициентов и свободных членов.
-        //------------------------------------------
-        //------------------------------------------
-        // showMatrix - method overloads showing results 
-        // showMatrix - перегрузки разнотипных выводов
-        //------------------------------------------
+        
         static void ShowMatrix(double[] x, double [,] matrix)
         {
             Console.WriteLine("\n Result:");
@@ -171,7 +163,7 @@ namespace Task_2
  
             for (int i = 0; i < a.GetLength(0); i++)
                 a[i, a.GetLength(1) - 1] = addtional[i];
- 
+            
             //---------------
             // Метод Якоби.
             //---------------
@@ -255,7 +247,7 @@ namespace Task_2
                 }
             }
         }
-        // private int t;
+        
  
         // Основная матрица и свободные члены.
         private double[,] matrix;
