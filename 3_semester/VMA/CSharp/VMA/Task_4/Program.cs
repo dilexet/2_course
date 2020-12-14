@@ -99,18 +99,13 @@ namespace Task_4
 
         public static void Main()
         {
-            int n = 3;
-            // double[,] A =
-            // {
-            //     {-1, -6},
-            //     {2, 6}
-            // };
+            int n = 2;
             double[,] A =
             {
-                {5, 2, 5},
-                {6, 9, 1},
-                {9, 1, 7}
+                {2, 1},
+                {9, 2}
             };
+           
 
             List<double[,]> listMatrixB = new List<double[,]>();
             List<double[,]> listMatrixD = new List<double[,]>();
@@ -165,7 +160,7 @@ namespace Task_4
             int index = 1;
             foreach (var item in lambda)
             {
-                Console.WriteLine($"x{index} = {item.Magnitude}");
+                Console.WriteLine($"x{index} = {item}");
                 index++;
             }
             
