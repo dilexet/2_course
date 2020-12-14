@@ -1,9 +1,56 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Numerics;
+using MathNet.Numerics;
 
 namespace Task_4
 {
     internal class Program
     {
+        public static List<Complex> GetRootsOfCubicEquations(double a, double b, double c)
+        {
+            var q = (Math.Pow(a, 2) - 3 * b) / 9;
+            var r = (2 * Math.Pow(a, 3) - 9 * a * b + 27 * c) / 54;
+ 
+            if (Math.Pow(r, 2) < Math.Pow(q, 3))
+            {
+                var t = Math.Acos(r / Math.Sqrt(Math.Pow(q, 3))) / 3;
+                var x1 = -2 * Math.Sqrt(q) * Math.Cos(t) - a / 3;
+                var x2 = -2 * Math.Sqrt(q) * Math.Cos(t + (2 * Math.PI / 3)) - a / 3;
+                var x3 = -2 * Math.Sqrt(q) * Math.Cos(t - (2 * Math.PI / 3)) - a / 3;
+                return new List<Complex> { x1, x2, x3 };
+            }
+            else
+            {
+                var A = -Math.Sign(r) * Math.Pow(Math.Abs(r) + Math.Sqrt(Math.Pow(r, 2) - Math.Pow(q, 3)), (1.0 / 3.0));
+                var B = (A == 0) ? 0.0 : q / A;
+ 
+                var x1 = (A + B) - a / 3;
+                var x2 = -(A + B) / 2 - (a / 3) + (Complex.ImaginaryOne * Math.Sqrt(3) * (A - B) / 2);
+                var x3 = -(A + B) / 2 - (a / 3) - (Complex.ImaginaryOne * Math.Sqrt(3) * (A - B) / 2);
+ 
+                if (A == B)
+                {
+                    x2 = -A - a / 3;
+                    return new List<Complex> { x1, x2 };
+                }
+                return new List<Complex> { x1, x2, x3 };
+            }
+        }
+        public static Complex[] raschet(double b, double c)
+        {
+            double a = 1;
+            Complex x1 = 0;
+            Complex x2 = 0;
+            double D = Math.Pow(b, 2) - 4 * a * c;
+            if (D > 0 || D == 0)
+            {
+                x1 = (-b + Math.Sqrt(D)) / (2 * a);
+                x2 = (-b - Math.Sqrt(D)) / (2 * a);
+            }
+
+            return new[] {x1, x2};
+        }
         static void PrintElementMatrix(double[,] matrix)
         {
             for (int i = 0; i < matrix.GetLength(0); i++)
@@ -17,54 +64,10 @@ namespace Task_4
             }
         }
 
-        public static void Main(string[] args)
+        static double[,] MatrixMultiplication(double[,] a, double[,] b)
         {
-            int n = 4;
-            double[,] A = new double[,]
-            {
-                {2.2, 1, 0.5, 2},
-                {1, 1.3, 2, 1},
-                {0.5, 2, 0.5, 1.6},
-                {2, 1, 1.6, 2}
-            };
-            //////// 1 этап /////////////////////
-            double[,] B1 = new double[,]
-            {
-                {1, 0, 0, 0},
-                {0, 1, 0, 0},
-                {0, 0, 1, 0},
-                {0, 0, 0, 1}
-            };
-            double[,] B1_1 = new double[,]
-            {
-                {1, 0, 0, 0},
-                {0, 1, 0, 0},
-                {0, 0, 1, 0},
-                {0, 0, 0, 1}
-            };
-            double bn1N1 = 1 / A[n - 1, n - 2];
-            // Console.WriteLine(bn1N1);
-            // Получение матрицы B1
-            for (int j = 0; j < n; j++)
-            {
-                if (j == n - 2)
-                {
-                    B1[n - 2, n - 2] = bn1N1;
-                }
-                else
-                {
-                    B1[n - 2, j] = (-1) * (A[n - 1, j] / A[n - 1, n - 2]);
-                }
-            }
-
-            // Получение матрицы B1 ^ -1
-            for (int i = 0; i < n; i++)
-            {
-                B1_1[n - 2, i] = A[n - 1, i];
-            }
-
-            double[,] Ditem = new double[n, n];
-            double[,] D = new double[n, n];
+            int n = a.GetLength(0);
+            double[,] c = new double[n, n];
             // Ditem = B1 ^ -1 * A
             for (int i = 0; i < n; i++)
             {
@@ -72,176 +75,100 @@ namespace Task_4
                 {
                     for (int k = 0; k < n; k++)
                     {
-                        Ditem[i, j] += B1_1[i, k] * A[k, j];
+                        c[i, j] += a[i, k] * b[k, j];
                     }
                 }
             }
+            return c;
+        }
 
-            // D = Ditem * B
-            for (int i = 0; i < n; i++)
+        static double[,] GeneratingTheIdentityMatrix(int size)
+        {
+            double[,] matrix = new double[size, size];
+            for (int i = 0; i < size; i++)
             {
+                for (int j = 0; j < size; j++)
+                {
+                    if (i == j)
+                        matrix[i, j] = 1;
+                }
+            }
+
+            return matrix;
+        }
+
+        public static void Main()
+        {
+            int n = 3;
+            // double[,] A =
+            // {
+            //     {-1, -6},
+            //     {2, 6}
+            // };
+            double[,] A =
+            {
+                {5, 2, 5},
+                {6, 9, 1},
+                {9, 1, 7}
+            };
+
+            List<double[,]> listMatrixB = new List<double[,]>();
+            List<double[,]> listMatrixD = new List<double[,]>();
+            listMatrixD.Add(A);
+
+            for (int count = 0; count < n - 1; count++)
+            {
+                double values = listMatrixD[count][n - 1 - count, n - 2 - count];
+                double[,] Bn = GeneratingTheIdentityMatrix(n);
                 for (int j = 0; j < n; j++)
                 {
-                    for (int k = 0; k < n; k++)
+                    if (j == n - 2 - count)
                     {
-                        D[i, j] += Ditem[i, k] * B1[k, j];
+                        Bn[n - 2 - count, n - 2 - count] = 1 / values;
+                    }
+                    else
+                    {
+                        Bn[n - 2 - count, j] = (-1) * (listMatrixD[count][n - 1 - count, j] /
+                                                       listMatrixD[count][n - 1 - count, n - 2 - count]);
                     }
                 }
-            }
-        /////////////////////////////////
-        /// 2 этап //////////////
-        double[,] B2 = new double[,]
-        {
-            {1, 0, 0, 0},
-            {0, 1, 0, 0},
-            {0, 0, 1, 0},
-            {0, 0, 0, 1}
-        };
-        double bn1N1_2 = 1 / D[n - 2, n - 3];
-        // Получение матрицы B2
-        for (int j = 0; j < n; j++)
-        {
-            if (j == n - 3)
-            {
-                B2[n - 3, n - 3] = bn1N1_2;
-            }
-            else
-            {
-                B2[n - 3, j] = (-1) * (D[n - 2, j] / D[n - 2, n - 3]);
-            }
-        }
-        double[,] B2_1 = new double[,]
-        {
-            {1, 0, 0, 0},
-            {0, 1, 0, 0},
-            {0, 0, 1, 0},
-            {0, 0, 0, 1}
-        };
-        // Получение матрицы B2 ^ -1
-        for (int i = 0; i < n; i++)
-        {
-            B2_1[n - 3, i] = D[n - 2, i];
-        }
-
-        Ditem = null;
-        Ditem = new double[n, n];
-        double[,] D2 = new double[n, n];
-        // Ditem = B2 ^ -1 * D1
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                for (int k = 0; k < n; k++)
+                listMatrixB.Add(Bn);
+                double[,] Bn_1 = GeneratingTheIdentityMatrix(n);
+                for (int i = 0; i < n; i++)
                 {
-                    Ditem[i, j] += B2_1[i, k] * D[k, j];
+                    Bn_1[n - 2 - count, i] = listMatrixD[count][n - 1 - count, i];
                 }
-            }
-        }
 
-        // D2 = Ditem * B2
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                for (int k = 0; k < n; k++)
-                {
-                    D2[i, j] += Ditem[i, k] * B2[k, j];
-                }
+                double[,] Dn = new double[n, n];
+                Dn = MatrixMultiplication(MatrixMultiplication(Bn_1, listMatrixD[count]), Bn);
+                listMatrixD.Add(Dn);
+                PrintElementMatrix(Dn);
+                Console.WriteLine("\n");
             }
-        }
-        //////////////////////////////////
-        /// 3 этап ///////////////
-        double[,] B3 = new double[,]
-        {
-            {1, 0, 0, 0},
-            {0, 1, 0, 0},
-            {0, 0, 1, 0},
-            {0, 0, 0, 1}
-        };
-        double bn1N1_3 = 1 / D2[n - 3, n - 4];
-        
-        // Получение матрицы B3
-        for (int j = 0; j < n; j++)
-        {
-            if (j == n - 4)
-            {
-                B3[n - 4, n - 4] = bn1N1_3;
-            }
-            else
-            {
-                B3[n - 4, j] = (-1) * (D2[n - 3, j] / D2[n - 3, n - 4]);
-            }
-        }
-        double[,] B3_1 = new double[,]
-        {
-            {1, 0, 0, 0},
-            {0, 1, 0, 0},
-            {0, 0, 1, 0},
-            {0, 0, 0, 1}
-        };
-        // Получение матрицы B3 ^ -1
-        for (int i = 0; i < n; i++)
-        {
-            B3_1[n - 4, i] = D2[n - 3, i];
-        }
 
-        Ditem = null;
-        Ditem = new double[n, n];
-        double[,] D3 = new double[n, n];
-        // Ditem = B3 ^ -1 * D2
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
+            Complex[] lambda = new Complex[n];
+            if (n == 3)
             {
-                for (int k = 0; k < n; k++)
-                {
-                    Ditem[i, j] += B3_1[i, k] * D2[k, j];
-                }
+                lambda = GetRootsOfCubicEquations((-1) * listMatrixD[n - 1][0, 0],
+                    (-1) * listMatrixD[n - 1][0, 1],
+                    (-1) * listMatrixD[n - 1][0, 2]).ToArray();
+               
             }
-        }
-
-        // D3 = Ditem * B3
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
+            else if (n == 2)
             {
-                for (int k = 0; k < n; k++)
-                {
-                    D3[i, j] += Ditem[i, k] * B3[k, j];
-                }
+                lambda = raschet((-1) * listMatrixD[n - 1][0, 0], 
+                    (-1) * listMatrixD[n - 1][0, 1]);
+               
             }
-        }
-
-        D3[1, 1] = 0;
-        
-        /// 4 этап ///////////////
-        double[,] B = new double[n,n];
-        Ditem = null;
-        Ditem = new double[n, n];
-        // Ditem = B1 * B2
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
+            
+            Console.WriteLine("\nСобственные значения:");
+            int index = 1;
+            foreach (var item in lambda)
             {
-                for (int k = 0; k < n; k++)
-                {
-                    Ditem[i, j] += B1[i, k] * B2[k, j];
-                }
+                Console.WriteLine($"x{index} = {item.Magnitude}");
+                index++;
             }
-        }
-
-        // B = Ditem * B3
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                for (int k = 0; k < n; k++)
-                {
-                    B[i, j] += Ditem[i, k] * B3[k, j];
-                }
-            }
-        }
-        
+            
         }
     }
 }
