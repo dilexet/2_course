@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Laba_17.Gifts
+﻿namespace Laba_17.Gifts
 {
     public class Waffles : ITucker
     {
