@@ -46,6 +46,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/laba_4.py" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
@@ -114,6 +115,8 @@
       <workItem from="1607930343214" duration="243000" />
       <workItem from="1607930641556" duration="99000" />
       <workItem from="1607936375570" duration="44000" />
+      <workItem from="1608894896618" duration="4169000" />
+      <workItem from="1608899440907" duration="193000" />
     </task>
     <servers />
   </component>
@@ -141,22 +144,38 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="776" y="297" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1607929202798" />
-    <state width="914" height="494" key="GridCell.Tab.0.bottom" timestamp="1607936419608">
+    <state width="914" height="490" key="GridCell.Tab.0.bottom" timestamp="1608899634801">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="494" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1607936419608" />
-    <state width="914" height="494" key="GridCell.Tab.0.center" timestamp="1607936419608">
+    <state width="914" height="490" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1608899634801" />
+    <state width="914" height="490" key="GridCell.Tab.0.center" timestamp="1608899634789">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="494" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1607936419608" />
-    <state width="914" height="494" key="GridCell.Tab.0.left" timestamp="1607936419607">
+    <state width="914" height="490" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1608899634789" />
+    <state width="914" height="490" key="GridCell.Tab.0.left" timestamp="1608899634789">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="494" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1607936419607" />
-    <state width="914" height="494" key="GridCell.Tab.0.right" timestamp="1607936419608">
+    <state width="914" height="490" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1608899634789" />
+    <state width="914" height="490" key="GridCell.Tab.0.right" timestamp="1608899634789">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="494" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1607936419608" />
+    <state width="914" height="490" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1608899634789" />
+    <state width="914" height="363" key="GridCell.Tab.1.bottom" timestamp="1608899095868">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="914" height="363" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1608899095868" />
+    <state width="914" height="363" key="GridCell.Tab.1.center" timestamp="1608899095868">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="914" height="363" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1608899095868" />
+    <state width="914" height="363" key="GridCell.Tab.1.left" timestamp="1608899095868">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="914" height="363" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1608899095868" />
+    <state width="914" height="363" key="GridCell.Tab.1.right" timestamp="1608899095868">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="914" height="363" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1608899095868" />
     <state x="498" y="187" key="SettingsEditor" timestamp="1606504266769">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -167,7 +186,7 @@
     <state x="1049" y="222" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1606502853296" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Python$laba_4.coverage" NAME="laba_4 Coverage Results" MODIFIED="1607936381228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$laba_4.coverage" NAME="laba_4 Coverage Results" MODIFIED="1608899602500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Python$main.coverage" NAME="laba_4 Coverage Results" MODIFIED="1607929208615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
