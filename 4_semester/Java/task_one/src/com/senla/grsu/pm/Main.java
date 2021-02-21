@@ -2,6 +2,10 @@ package com.senla.grsu.pm;
 
 public class Main
 {
+    public static void main(String[] args)
+    {
+
+    }
     /*
     Есть порт для хранения воды. Порт может принять 10 кораблей.
     Корабли состоят из двух палуб.
@@ -31,8 +35,4 @@ public class Main
     Задание можно выполнять в группах до 3х человек, можно индивидуально.
     -> обозначает подменю
     */
-    public static void main(String[] args)
-    {
-
-    }
 }
