@@ -1,12 +1,21 @@
 package com.senla.grsu.pm;
 
+import java.util.Random;
+
 public class Ship {
+    private final int id;
     private final Deck deckOne;
     private final Deck deckTwo;
 
     public Ship() {
+        Random random = new Random();
+        id = random.nextInt();
         deckOne = new Deck();
         deckTwo = new Deck();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void AddContainer(Container container) {
