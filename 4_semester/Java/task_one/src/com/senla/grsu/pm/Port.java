@@ -1,6 +1,5 @@
 package com.senla.grsu.pm;
 
-public class Port
-{
+public class Port {
 
 }

@@ -1,10 +1,30 @@
 package com.senla.grsu.pm;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
+public class Main {
+    public static void main(String[] args) {
 
+        Ship ship = new Ship();
+
+        Container container1 = new Container(ContainerSize.Big);
+        Container container2 = new Container(ContainerSize.Small);
+        Container container3 = new Container(ContainerSize.Big);
+        Container container4 = new Container(ContainerSize.Small);
+
+        container1.AddWater(600);
+        container2.AddWater(200);
+        container3.AddWater(600);
+
+        container4.AddWater(200);
+
+
+
+        ship.AddContainer(container1);
+        ship.AddContainer(container2);
+        ship.AddContainer(container3);
+
+        ship.AddContainer(container4);
+
+        var litersWater = ship.UnloadShip();
     }
     /*
     Есть порт для хранения воды. Порт может принять 10 кораблей.
