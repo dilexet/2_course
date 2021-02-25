@@ -1,4 +1,4 @@
-package com.senla.grsu.pm;
+package com.senla.enums;
 
 public enum ContainerSize
 {

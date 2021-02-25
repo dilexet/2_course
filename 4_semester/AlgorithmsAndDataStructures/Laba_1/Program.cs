@@ -16,14 +16,21 @@ namespace Laba_1
 
             int[] black = new int[n];
             int[] red = new int[n];
+            
             for (int i = 0; i < n; i++)
             {
                 black[i] = i + 1;
             }
+            
             Console.WriteLine("Введите числа красных карточек: ");
             for (int i = 0; i < n; i++)
             {
-                red[i] = Convert.ToInt32(Console.ReadLine());
+                int item;
+                do
+                {
+                    item = Convert.ToInt32(Console.ReadLine());
+                } while (item > n || item < 1);
+                red[i] = item;
             }
             Console.Write("\nЧёрные карточки:\t");
             foreach (var item in black)

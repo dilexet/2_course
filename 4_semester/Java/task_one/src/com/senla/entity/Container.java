@@ -1,4 +1,6 @@
-package com.senla.grsu.pm;
+package com.senla.entity;
+
+import com.senla.enums.ContainerSize;
 
 public class Container {
     private float litersOfWater;

@@ -1,8 +1,20 @@
-package com.senla.grsu.pm;
+package com.senla.app;
+
+import com.senla.entity.Container;
+import com.senla.entity.Port;
+import com.senla.enums.ContainerSize;
+import com.senla.Initializer.Manager;
 
 public class Main {
     public static void main(String[] args) {
 
+        /*
+        Menu - showOptions,
+        com.senla.service - Manager - performAction
+        Initializer - start
+        вся логика подсчётов в менеджере
+
+        * */
         Manager manager = new Manager(new Port());
 
         //  4. Создать корабль -> наполнить корабль контейнерами с водой

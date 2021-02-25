@@ -1,4 +1,4 @@
-package com.senla.grsu.pm;
+package com.senla.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;

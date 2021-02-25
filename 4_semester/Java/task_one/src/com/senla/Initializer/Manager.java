@@ -1,4 +1,9 @@
-package com.senla.grsu.pm;
+package com.senla.Initializer;
+
+import com.senla.entity.Container;
+import com.senla.entity.Port;
+import com.senla.entity.Ship;
+import com.senla.enums.ContainerSize;
 
 import java.util.Collection;
 
