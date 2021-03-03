@@ -17,6 +17,7 @@ public class AitkenMethod {
         }
         while (Math.abs(x - x0) > eps);
         System.out.println("Iteration = " + iteration);
+        System.out.println("f(x) = " + f(x));
         return x;
     }
 
@@ -25,7 +26,7 @@ public class AitkenMethod {
     }
 
     private static double fi(double x) {
-        double lambda = 2;
+        double lambda = 0.5;
         return x - lambda * (x - Math.atan(1 / x));
     }
 }

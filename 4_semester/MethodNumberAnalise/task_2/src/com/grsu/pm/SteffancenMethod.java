@@ -11,6 +11,7 @@ public class SteffancenMethod {
         }
         while (Math.abs(f(x)) > eps);
         System.out.println("Iteration = " + iteration);
+        System.out.println("f(x) = " + f(x));
         return x;
     }
 

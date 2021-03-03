@@ -39,12 +39,7 @@ namespace test
         {
             return Math.Sin(x + 2) - Math.Pow(x, 2) + 2 * x - 1;
         }
-
-        private double G(double x)
-        {
-            return x + 0.5 * F(x);
-        }
-
+        
         private double Df(double x)
         {
             return Math.Cos(x + 2) - 2 * x + 2;
@@ -71,7 +66,7 @@ namespace test
 
             Console.WriteLine($"X:{x}, Iterations:{count}");
 
-            Console.WriteLine($"F(x):{F(x)}, G(x):{G(x)}");
+            // Console.WriteLine($"F(x):{F(x)}, G(x):{G(x)}");
         }
     }
 
@@ -101,7 +96,7 @@ namespace test
 
             Console.WriteLine($"X:{x}, Iterations:{count}");
 
-            Console.WriteLine($"F(x):{F(x)}, G(x):{G(x)}");
+            // Console.WriteLine($"F(x):{F(x)}, G(x):{G(x)}");
         }
     }
 
@@ -114,30 +109,14 @@ namespace test
             double begin = 1;
             double end = 1.3;
 
+            Console.WriteLine("\n1 - Метод деления пополам.\n");
+            new HalfMethod().Start(begin, end, Epsilon);
 
-            Console.WriteLine("1 - Метод деления пополам.\n" +
-                              "2 - Метод итераций.\n" +
-                              "3 - Метод Ньютона.\n");
-                              var value = Console.ReadKey(true).Key;
+            Console.WriteLine("\n2 - Метод итераций.\n");
+            new SimpleIterationsMethod().Start(begin, Epsilon);
 
-            switch (value)
-            {
-                case ConsoleKey.D1:
-                    HalfMethod halfMethod = new HalfMethod();
-                    halfMethod.Start(begin, end, Epsilon);
-                    break;
-                case ConsoleKey.D2:
-                    SimpleIterationsMethod simpleIterationsMethod = new SimpleIterationsMethod();
-                    simpleIterationsMethod.Start(1, Epsilon);
-                    break;
-                case ConsoleKey.D3:
-                    NewtonMethod newtonMethod = new NewtonMethod();
-                    newtonMethod.Start(1.2, Epsilon);
-                    break;
-                default:
-                    Console.WriteLine("Некорректный ввод.");
-                    break;
-            }
+            Console.WriteLine("\n3 - Метод Ньютона.\n");
+            new NewtonMethod().Start(begin, Epsilon);
         }
     }
 }

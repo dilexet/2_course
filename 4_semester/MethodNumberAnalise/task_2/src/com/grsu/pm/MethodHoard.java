@@ -10,6 +10,7 @@ public class MethodHoard {
             iter++;
         } while (Math.abs(f(x)) > eps);
         System.out.println("Iteration = " + iter);
+        System.out.println("f(x) = " + f(x));
         return x;
     }
     private static double f(double x){
