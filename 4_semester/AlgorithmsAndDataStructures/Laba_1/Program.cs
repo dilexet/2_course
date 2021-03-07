@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Laba_1
 {
-    internal class Program
+    internal static class Program
     {
         public static void Main(string[] args)
         {

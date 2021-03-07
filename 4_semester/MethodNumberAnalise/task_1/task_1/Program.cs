@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace test
+namespace task_1
 {
     public class HalfMethod
     {
