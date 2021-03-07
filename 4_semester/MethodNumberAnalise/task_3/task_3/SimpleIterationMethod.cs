@@ -18,10 +18,10 @@ namespace task_3
 
         private void F(double x, double y)
         {
-            var f1 = Math.Sin(x + 2) - y - 1.5;
-            var f2 = x + Math.Cos(y - 2) - 0.5;
-            Console.WriteLine($"F1 (x,y) = {f1}");
-            Console.WriteLine($"F2 (x,y) = {f2}");
+            var f = Math.Sin(x + 2) - y - 1.5;
+            var g = x + Math.Cos(y - 2) - 0.5;
+            Console.WriteLine($"F (x,y) = {f:0.#####}");
+            Console.WriteLine($"G (x,y) = {g:0.#####}");
         }
         
         public void Start(double x0, double y0, double epsilon)
@@ -41,10 +41,8 @@ namespace task_3
             
             Console.WriteLine($"x = {x}");
             Console.WriteLine($"y = {y}");
-            Console.WriteLine($"Iteration = {iteration}");
-            Console.WriteLine($"Fi_1 = {Fi_1(y)}");
-            Console.WriteLine($"Fi_2 = {Fi_2(x)}");
             F(x, y);
+            Console.WriteLine($"Iteration = {iteration}");
         }
     }
 }

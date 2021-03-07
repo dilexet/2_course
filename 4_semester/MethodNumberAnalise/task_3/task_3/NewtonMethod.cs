@@ -18,17 +18,17 @@ namespace task_3
         
         private double F(double x, double y)
         {
-            return Math.Tan(x * y + 0.1) - Math.Pow(x, 2);
+            return Math.Sin(x + 2) - y - 1.5;
         }
         
         private double Dfx(double x, double y)
         {
-            return y / Math.Pow(Math.Cos(x * y + 0.1), 2) - 2 * x;
+            return Math.Cos(x + 2);
         }
 
         private double Dfy(double x, double y)
         {
-            return x / Math.Pow(Math.Cos(x * y + 0.1), 2);
+            return -1;
         }
         
         #endregion
@@ -37,16 +37,16 @@ namespace task_3
         
         private double G(double x, double y)
         {
-            return Math.Pow(x, 2) + 2 * Math.Pow(y, 2) - 1;
+            return x + Math.Cos(y - 2) - 0.5;
         }
         
         private double Dgx(double x, double y)
         {
-            return 2 * x;
+            return 1;
         }
         private double Dgy(double x, double y)
         {
-            return 4 * y;
+            return -Math.Sin(y - 2);
         }
         
         #endregion
@@ -56,7 +56,7 @@ namespace task_3
         {
             double x = x0;
             double y = y0;
-
+            int iteration = 0;
             while (Math.Abs(F(x, y)) > epsilon || Math.Abs(G(x, y)) > epsilon)  
             {
                 double a = Determinant(F(x0, y0), Dfy(x0, y0), G(x0, y0), Dgy(x0, y0));
@@ -66,18 +66,14 @@ namespace task_3
                 y = y0 - b / j;
                 x0 = x;
                 y0 = y;
+                iteration++;
             }
             
             Console.WriteLine($"x = {x}");
             Console.WriteLine($"y = {y}");
-
-            Console.WriteLine($"f = {F(x, y)}");
-            Console.WriteLine($"f'x = {Dfx(x, y)}");
-            Console.WriteLine($"f'y = {Dfy(x, y)}");
-            
-            Console.WriteLine($"g = {G(x, y)}");
-            Console.WriteLine($"g'x = {Dgx(x, y)}");
-            Console.WriteLine($"g'y = {Dgy(x, y)}");
+            Console.WriteLine($"F(x,y) = {F(x,y):0.#########}");
+            Console.WriteLine($"G(x,y) = {G(x,y):0.#########}");
+            Console.WriteLine($"Iteration = {iteration}");
         }
     }
 
