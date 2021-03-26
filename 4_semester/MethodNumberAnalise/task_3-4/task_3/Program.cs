@@ -12,8 +12,6 @@ namespace task_3
             
             Console.WriteLine("\nNewton method:\n");
             new NewtonMethod().Start(0.1, 0.1, 0.0001);
-
-           
         }
     }
 }
