@@ -2,10 +2,12 @@
 
 namespace Laba_2
 {
-    public static class Program
+    static class Program
     {
-        #region ArrayWorkRegion
-        
+        private static int _numberOfComparisons;
+        private static int _numberOfPermutations;
+        private static int[] _intArray;
+
         private static int[] GenerateArray(int size)
         {
             Random random = new Random();
@@ -24,230 +26,385 @@ namespace Laba_2
                 Console.Write($"{el} ");
             }
         }
-
-        #endregion
-
-        // 1) Сортировка прямым включением
-        #region DirectSortRegion
-
-        private static int[] DirectSort(int[] array)
+        
+        public static void Main()
         {
-            for (int i = 1; i < array.Length; i++)
-            {
-                var a = array[i];
-                int j = i;
-                while (j > 0 && a < array[j - 1])
-                {
-                    array[j] = array[j - 1];
-                    j--;
-                }
+            Console.WriteLine("Введите длину массива: ");
+            _intArray = GenerateArray(Convert.ToInt32(Console.ReadLine()));
+            Console.WriteLine("\nИсходный массив:");
+            GetArray(_intArray);
+            Console.WriteLine();
+            // 1
+            Console.WriteLine("\n1) сортировка включением;\n");
+            InclusionSort(_intArray);
+            Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
+            GetArray(_intArray);
+            Console.WriteLine();
 
-                array[j] = a;
-            }
+            // 2
+            Console.WriteLine("\n2) сортировка выбором;\n");
+            SelectionSort(_intArray);
+            Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
+            GetArray(_intArray);
+            Console.WriteLine();
 
-            var result = array;
-            return result;
+            // 3
+            Console.WriteLine("\n3) сортировка обменом(шейкерная сортировка);\n");
+            ExchangeSort(_intArray);
+            Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
+            GetArray(_intArray);
+            Console.WriteLine();
+
+            // 4
+            _numberOfComparisons = 0;
+            _numberOfPermutations = 0;
+            Console.WriteLine("\n4) сортировка с помощью разделения – быстрая сортировка Хаара;\n");
+            DualPivotQuickSort(_intArray, 1, _intArray.Length - 2);
+            Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
+            GetArray(_intArray);
+            Console.WriteLine();
+
+            // 5
+            _numberOfComparisons = 0;
+            _numberOfPermutations = 0;
+            Console.WriteLine("\n5) пирамидальная сортировка\n");
+            HeapSort(_intArray);
+            Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
+            GetArray(_intArray);
+            Console.WriteLine();
         }
-        
-        #endregion
 
-        // 2) Сортировка выбором
-        #region SortSelectionRegion
-        
-        public static int[] SortSelection(int[] array)
+        private static void SwapInt(int[] array, int i, int j)
         {
-            int length = array.Length;
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
 
-            for (int i = 0; i < length - 1; i++)
+        // TODO: сортировка включением
+        private static void InclusionSort(int[] array)
+        {
+            _numberOfComparisons = 0;
+            _numberOfPermutations = 0;
+//        for (int i = 1; i < array.length; i++) {
+//            int key = array[i];
+//            ++numberOfComparisons;
+//            if (array[i - 1] > key) {
+//                int j = i - 1;
+//                for (; j >= 0; j--) {
+//                    numberOfComparisons++;
+//                    if (array[j] > key) {
+//                        array[j + 1] = array[j];
+//                        numberOfPermutations++;
+//                    }
+//                    else {
+//                        break;
+//                    }
+//                }
+//                array[j + 1] = key;
+//            }
+////            else {
+////                numberOfComparisons++;
+////            }
+//        }
+            for (int left = 0; left < array.Length; left++)
             {
-                var min = i;
-
-                for (int j = i + 1; j < length; j++)
+                // Вытаскиваем значение элемента
+                int value = array[left];
+                // Перемещаемся по элементам, которые перед вытащенным элементом
+                int i = left - 1;
+                for (; i >= 0; i--)
                 {
-                    if (array[j] < array[min])
+                    _numberOfComparisons++;
+                    // Если вытащили значение меньшее — передвигаем больший элемент дальше
+                    if (value < array[i])
                     {
-                        min = j;
+                        array[i + 1] = array[i];
+                    }
+                    else
+                    {
+                        // Если вытащенный элемент больше — останавливаемся
+                        break;
                     }
                 }
 
-                if (min != i)
-                {
-                    var temp = array[i];
-                    array[i] = array[min];
-                    array[min] = temp;
-                }
+                // В освободившееся место вставляем вытащенное значение
+                _numberOfPermutations++;
+                array[i + 1] = value;
             }
-
-            var result = array;
-            return result;
         }
 
-        #endregion
-
-        // 3) Cортировка обменом (шейкерная сортировка)
-        #region ShakerSortRegion
-        
-        public static int[] ShakerSort(int[] array)
+        // TODO: Сортировка выбором
+        private static void SelectionSort(int[] intArray)
         {
-            for (var i = 0; i < array.Length / 2; i++)
+            _numberOfComparisons = 0;
+            _numberOfPermutations = 0;
+//        for (int left = 0; left < intArray.length; left++) {
+//            int minInd = left;
+//            for (int i = left; i < intArray.length; i++) {
+//                numberOfComparisons++;
+//                if (intArray[i] < intArray[minInd]) {
+//                    minInd = i;
+//                }
+//            }
+//            swapInt(intArray, left, minInd);
+//            numberOfPermutations++;
+//        }
+            for (int i = 0; i < intArray.Length; i++)
             {
-                var swapFlag = false;
-                //проход слева направо
-                for (var j = i; j < array.Length - i - 1; j++)
+                // i - номер текущего шага
+                int pos = i;
+                int min = intArray[i];
+                // цикл выбора наименьшего элемента
+                for (int j = i + 1; j < intArray.Length; j++)
                 {
-                    if (array[j] > array[j + 1])
+                    _numberOfComparisons++;
+                    if (intArray[j] < min)
                     {
-                        var temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
-                        swapFlag = true;
+                        pos = j; // pos - индекс наименьшего элемента
+                        min = intArray[j];
                     }
                 }
 
-                //проход справа налево
-                for (var j = array.Length - 2 - i; j > i; j--)
+                intArray[pos] = intArray[i];
+                intArray[i] = min; // меняем местами наименьший с array[i]
+                _numberOfPermutations++;
+            }
+        }
+
+        // TODO: Сортировка обеменом (шейкерная)
+        private static void ExchangeSort(int[] array)
+        {
+            _numberOfComparisons = 0;
+            _numberOfPermutations = 0;
+            bool isSwapped;
+            int leftBorder = 0;
+            int rightBorder = array.Length - 1;
+            do
+            {
+                isSwapped = false;
+                for (int i = leftBorder; i + 1 <= rightBorder; i++)
                 {
-                    if (array[j - 1] > array[j])
+                    if (array[i] > array[i + 1])
                     {
-                        var temp = array[j - 1];
-                        array[j - 1] = array[j];
-                        array[j] = temp;
-                        swapFlag = true;
+                        SwapInt(array, i, i + 1);
+                        isSwapped = true;
+                        _numberOfPermutations++; //увеличиваем кол-во сравнений
+                    }
+
+                    _numberOfComparisons++; //увеличиваем кол-во перестановок
+                }
+
+                rightBorder--;
+
+                for (int i = rightBorder; i - 1 >= leftBorder; i--)
+                {
+                    _numberOfComparisons++;
+                    if (array[i] < array[i - 1])
+                    {
+                        SwapInt(array, i, i - 1);
+                        isSwapped = true;
+                        _numberOfPermutations++;
                     }
                 }
 
-                //если обменов не было выходим
-                if (!swapFlag)
-                {
-                    break;
-                }
-            }
-
-            var result = array;
-            return result;
+                leftBorder++;
+            } while (leftBorder < rightBorder && isSwapped);
         }
 
-        #endregion
 
-        // 4) Сортировка с помощью разделения – быстрая сортировка Хоара
-        #region SplitSortRegion
-
-        // метод возвращающий индекс опорного элемента
-        private static int Partition(int[] array, int minIndex, int maxIndex)
+        private static void HeapSort(int[] array)
         {
-            int pivot = minIndex - 1;
-            for (int i = minIndex; i < maxIndex; i++) // просматриваем с minIndex по maxIndex
-            {
-                if (array[i].CompareTo(array[maxIndex]) <= 0) // если элемент m[i] не превосходит m[maxIndex],
-                {
-                    pivot++; 
-                    var t = array[pivot];
-                    array[pivot] = array[i]; 
-                    array[i] = t; 
-                    
-                }
-            }
-            pivot++; 
-            var t2 = array[pivot];
-            array[pivot] = array[maxIndex]; 
-            array[maxIndex] = t2; 
-            return pivot; // в индексе pivot хранится <новая позиция элемента m[maxIndex]> + 1
-        }
-        
-        static int[] QuickSort(int[] array, int minIndex, int maxIndex)
-        {
-            if (minIndex >= maxIndex)
-            {
-                return array;
-            }
-
-            var pivotIndex = Partition(array, minIndex, maxIndex);
-            QuickSort(array, minIndex, pivotIndex - 1);
-            QuickSort(array, pivotIndex + 1, maxIndex);
-
-            return array;
-        }
-
-        static int[] QuickSort(int[] array)
-        {
-            return QuickSort(array, 0, array.Length - 1);
-        }
-
-        #endregion
-
-        // 5) Пирамидальная сортировка
-        #region HeapsortRegion
-        
-        private static int[] Heapsort(int[] array) 
-        {
+            _numberOfComparisons = 0;
+            _numberOfPermutations = 0;
             int n = array.Length;
-
             // Построение кучи (перегруппируем массив)
             for (int i = n / 2 - 1; i >= 0; i--)
-            {
                 Heapify(array, n, i);
-            }
-
             // Один за другим извлекаем элементы из кучи
-            for (int i=n-1; i>=0; i--)
+            for (int i = n - 1; i >= 0; i--)
             {
-                // Перемещаем текущий корень в конец
-                int temp = array[0];
-                array[0] = array[i];
-                array[i] = temp;
+                if (array[0] == array[i]) continue;
 
-                // вызываем процедуру heapify на уменьшенной куче
+                _numberOfPermutations++;
+                // Перемещаем текущий корень в конец
+                SwapInt(array, 0, i);
+                // Вызываем процедуру heapify на уменьшенной куче
                 Heapify(array, i, 0);
             }
-
-            var result = array;
-            return result;
         }
 
         // Процедура для преобразования в двоичную кучу поддерева с корневым узлом i, что является
         // индексом в arr[]. n - размер кучи
-        private static void Heapify(int[] array, int n, int i)
+        static void Heapify(int[] array, int n, int i)
         {
-            int largest = i;
-            // Инициализируем наибольший элемент как корень
-            int l = 2 * i + 1; // left = 2*i + 1
-            int r = 2 * i + 2; // right = 2*i + 2
+            int largest = i; // Инициализируем наибольший элемент как корень
+            int l = 2 * i + 1; // левый = 2i + 1
+            int r = 2 * i + 2; // правый = 2i + 2
 
             // Если левый дочерний элемент больше корня
-            if (l < n && array[l] > array[largest])
-                largest = l;
+            //numberOfComparisons++;
+            if (l < n)
+            {
+                _numberOfComparisons++;
+                if (array[l] > array[largest])
+                {
+                    largest = l;
+                    //правый дочерний элемент больше, чем самый большой элемент н
+                    // Еслиа данный момент
+                }
+            }
 
-            // Если правый дочерний элемент больше, чем самый большой элемент на данный момент
-            if (r < n && array[r] > array[largest])
-                largest = r;
+            //numberOfComparisons++;
+            if (r < n)
+            {
+                _numberOfComparisons++;
+                if (array[r] > array[largest])
+                {
+                    largest = r;
+                    // Если самый большой элемент не корень
+                }
+            }
 
-            // Если самый большой элемент не корень
             if (largest != i)
             {
-                int swap = array[i];
-                array[i] = array[largest];
-                array[largest] = swap;
-
+                SwapInt(array, i, largest);
+                _numberOfPermutations++;
                 // Рекурсивно преобразуем в двоичную кучу затронутое поддерево
                 Heapify(array, n, largest);
             }
         }
 
-        #endregion
-
-        public static void Main()
+        private static void DualPivotQuickSort(int[] arr, int leftPivotIndex, int rightPivotIndex)
         {
-            Console.Write("Введите количестов элементов массива: ");
-            var size = Convert.ToInt32(Console.ReadLine());
             
-            var arrayInt = GenerateArray(size);
-            Console.WriteLine("Исходный массив: ");
-            GetArray(arrayInt);
-            
-            
-            Console.WriteLine("\nОтсортированный массив: ");
-            var sortInt = Heapsort(arrayInt);
-            GetArray(sortInt);
+            if (leftPivotIndex <= rightPivotIndex + 1)
+            {
+                // piv[] stores left pivot and right pivot.
+                // piv[0] means left pivot and
+                // piv[1] means right pivot
+                int[] pivots;
+                pivots = Partition(arr, leftPivotIndex, rightPivotIndex);
+                DualPivotQuickSort(arr, leftPivotIndex, pivots[0] - 2);
+                DualPivotQuickSort(arr, pivots[0] + 2, pivots[1] - 2);
+                DualPivotQuickSort(arr, pivots[1] + 2, rightPivotIndex);
+            }
+        }
+
+        private static int[] Partition(int[] arr, int leftPivotIndex, int rightPivotIndex)
+        {
+            _numberOfComparisons++;
+            if (arr[leftPivotIndex] > arr[rightPivotIndex])
+            {
+                _numberOfPermutations++;
+                SwapInt(arr, leftPivotIndex, rightPivotIndex);
+            }
+
+            int leftMarker = leftPivotIndex - 1;
+            int leftCenterMarker = leftPivotIndex + 1;
+            int rightCenterMarker = rightPivotIndex - 1;
+            int rightMarker = rightPivotIndex + 1;
+            int leftPivot = arr[leftPivotIndex];
+            int rightPivot = arr[rightPivotIndex];
+
+            _numberOfComparisons++;
+            if (arr[leftMarker] > rightPivot)
+            {
+                for (int i = leftMarker; i < rightPivotIndex; i++)
+                {
+                    SwapInt(arr, i, i + 1);
+                    _numberOfPermutations++; // поменял
+                }
+
+                //numberOfPermutations++;
+                rightPivotIndex--;
+                leftPivotIndex--;
+                leftCenterMarker--;
+                rightCenterMarker--;
+            }
+            else
+            {
+                _numberOfComparisons++;
+                if (arr[leftMarker] > leftPivot)
+                {
+                    for (int i = leftMarker; i < leftPivotIndex; i++)
+                    {
+                        SwapInt(arr, i, i + 1);
+                        _numberOfPermutations++; // поменял
+                    }
+
+                    leftPivotIndex--;
+                    leftCenterMarker--;
+                    //numberOfPermutations++;
+                }
+            }
+
+            _numberOfComparisons++;
+            if (arr[rightMarker] < leftPivot)
+            {
+                for (int i = rightMarker; i > leftPivotIndex; i--)
+                {
+                    SwapInt(arr, i, i - 1);
+                    _numberOfPermutations++; //поменял
+                }
+
+                //numberOfPermutations++;
+                rightPivotIndex++;
+                leftPivotIndex++;
+                leftCenterMarker++;
+                rightCenterMarker++;
+            }
+            else
+            {
+                _numberOfComparisons++;
+                if (arr[rightMarker] < rightPivot)
+                {
+                    for (int i = rightMarker; i > rightPivotIndex; i--)
+                    {
+                        SwapInt(arr, i, i - 1);
+                        _numberOfPermutations++;
+                    }
+
+                    rightPivotIndex++;
+                    rightCenterMarker++;
+                    //numberOfPermutations++;
+                }
+            }
+
+            for (int i = leftCenterMarker; i <= rightCenterMarker; i++)
+            {
+                _numberOfComparisons++;
+                if (arr[i] < leftPivot)
+                {
+                    for (int j = i; j > leftPivotIndex; j--)
+                    {
+                        SwapInt(arr, j, j - 1);
+                        _numberOfPermutations++;
+                    }
+
+                    // numberOfPermutations++;
+                    leftPivotIndex++;
+                }
+                else
+                {
+                    _numberOfComparisons++;
+                    if (arr[i] > rightPivot)
+                    {
+                        for (int j = i; j < rightPivotIndex; j++)
+                        {
+                            SwapInt(arr, j, j + 1);
+                            _numberOfPermutations++;
+                        }
+
+                        // numberOfPermutations++;
+                        rightCenterMarker--;
+                        i--;
+                        rightPivotIndex--;
+                    }
+                }
+            }
+
+            return new[] {leftPivotIndex, rightPivotIndex};
         }
     }
 }
