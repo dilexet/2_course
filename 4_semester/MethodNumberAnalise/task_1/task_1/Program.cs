@@ -39,7 +39,7 @@ namespace task_1
         {
             return Math.Sin(x + 2) - Math.Pow(x, 2) + 2 * x - 1;
         }
-        
+
         private double Df(double x)
         {
             return Math.Cos(x + 2) - 2 * x + 2;
@@ -74,12 +74,12 @@ namespace task_1
     {
         private double F(double x)
         {
-            return Math.Sin(x + 2) - Math.Pow(x, 2) + 2 * x - 1;
+            return Math.Pow(x, 3) / 6 - 7 * Math.Pow(x, 2) / 12 + 13 / 7.0;
         }
 
         private double G(double x)
         {
-            return x + 0.5 * F(x);
+            return x - 1 / 3.0 * F(x);
         }
 
         public void Start(double x, double epsilon)
@@ -106,17 +106,17 @@ namespace task_1
 
         private static void Main()
         {
-            double begin = 1;
+            double begin = -1;
             double end = 1.3;
 
-            Console.WriteLine("\n1 - Метод деления пополам.\n");
-            new HalfMethod().Start(begin, end, Epsilon);
+            // Console.WriteLine("\n1 - Метод деления пополам.\n");
+            // new HalfMethod().Start(begin, end, Epsilon);
 
             Console.WriteLine("\n2 - Метод итераций.\n");
             new SimpleIterationsMethod().Start(begin, Epsilon);
 
-            Console.WriteLine("\n3 - Метод Ньютона.\n");
-            new NewtonMethod().Start(begin, Epsilon);
+            // Console.WriteLine("\n3 - Метод Ньютона.\n");
+            // new NewtonMethod().Start(begin, Epsilon);
         }
     }
 }

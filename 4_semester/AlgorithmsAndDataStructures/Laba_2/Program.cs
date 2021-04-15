@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Laba_2
 {
@@ -30,27 +31,28 @@ namespace Laba_2
         public static void Main()
         {
             Console.WriteLine("Введите длину массива: ");
-            _intArray = GenerateArray(Convert.ToInt32(Console.ReadLine()));
+            var size = Convert.ToInt32(Console.ReadLine());
+            _intArray = GenerateArray(size);
             Console.WriteLine("\nИсходный массив:");
-            GetArray(_intArray);
+            GetArray(_intArray.ToArray());
             Console.WriteLine();
             // 1
             Console.WriteLine("\n1) сортировка включением;\n");
-            InclusionSort(_intArray);
+            InclusionSort(_intArray.ToArray());
             Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
             GetArray(_intArray);
             Console.WriteLine();
 
             // 2
             Console.WriteLine("\n2) сортировка выбором;\n");
-            SelectionSort(_intArray);
+            SelectionSort(_intArray.ToArray());
             Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
             GetArray(_intArray);
             Console.WriteLine();
 
             // 3
             Console.WriteLine("\n3) сортировка обменом(шейкерная сортировка);\n");
-            ExchangeSort(_intArray);
+            ExchangeSort(_intArray.ToArray());
             Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
             GetArray(_intArray);
             Console.WriteLine();
@@ -59,7 +61,7 @@ namespace Laba_2
             _numberOfComparisons = 0;
             _numberOfPermutations = 0;
             Console.WriteLine("\n4) сортировка с помощью разделения – быстрая сортировка Хаара;\n");
-            DualPivotQuickSort(_intArray, 1, _intArray.Length - 2);
+            DualPivotQuickSort(_intArray.ToArray(), 1, _intArray.Length - 2);
             Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
             GetArray(_intArray);
             Console.WriteLine();
@@ -68,7 +70,7 @@ namespace Laba_2
             _numberOfComparisons = 0;
             _numberOfPermutations = 0;
             Console.WriteLine("\n5) пирамидальная сортировка\n");
-            HeapSort(_intArray);
+            HeapSort(_intArray.ToArray());
             Console.WriteLine("Сравнения: " + _numberOfComparisons + "\nПерестановок: " + _numberOfPermutations);
             GetArray(_intArray);
             Console.WriteLine();
@@ -86,27 +88,6 @@ namespace Laba_2
         {
             _numberOfComparisons = 0;
             _numberOfPermutations = 0;
-//        for (int i = 1; i < array.length; i++) {
-//            int key = array[i];
-//            ++numberOfComparisons;
-//            if (array[i - 1] > key) {
-//                int j = i - 1;
-//                for (; j >= 0; j--) {
-//                    numberOfComparisons++;
-//                    if (array[j] > key) {
-//                        array[j + 1] = array[j];
-//                        numberOfPermutations++;
-//                    }
-//                    else {
-//                        break;
-//                    }
-//                }
-//                array[j + 1] = key;
-//            }
-////            else {
-////                numberOfComparisons++;
-////            }
-//        }
             for (int left = 0; left < array.Length; left++)
             {
                 // Вытаскиваем значение элемента
