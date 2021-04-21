@@ -44,16 +44,16 @@ namespace Laba_3
             return c.OrderBy(i => i).ToArray();
         }
 
-        private static bool Check(int value, int[] array, int cur)
+        private static bool Check(int requiredAmountBanknotes, int[] availableBanknotes, int maximumBanknote)
         {
-            int nMax = array.ToList().LastOrDefault(x => x < cur);
+            int newMaximumBanknote = availableBanknotes.ToList().LastOrDefault(x => x < maximumBanknote);
 
-            int item = value / cur;
+            int item = requiredAmountBanknotes / maximumBanknote;
             if (item == 0)
             {
-                if (nMax == 0)
+                if (newMaximumBanknote == 0)
                 {
-                    var newArr = array.ToList().Where(x => x < array[array.Length - 1]).ToArray();
+                    var newArr = availableBanknotes.ToList().Where(x => x < availableBanknotes[availableBanknotes.Length - 1]).ToArray();
                     if (newArr.Length > 0)
                     {
                         return Check(_curValue, newArr, newArr[newArr.Length - 1]);
@@ -62,23 +62,30 @@ namespace Laba_3
                     return false;
                 }
 
-                return Check(value, array, nMax);
+                return Check(requiredAmountBanknotes, availableBanknotes, newMaximumBanknote);
             }
 
             int newValue;
-            int count = array.Count(x => x == cur);
+            int count = availableBanknotes.Count(x => x == maximumBanknote);
             if (item >= count)
             {
-                newValue = value - cur * count;
+                newValue = requiredAmountBanknotes - maximumBanknote * count;
             }
             else
             {
-                newValue = value - cur * item;
+                newValue = requiredAmountBanknotes - maximumBanknote * item;
             }
 
-            if (newValue == 0) return true;
-            if (nMax == 0) return false;
-            return Check(newValue, array, nMax);
+            if (newValue == 0)
+            {
+                return true;
+            }
+
+            if (newMaximumBanknote == 0)
+            {
+                return false;
+            }
+            return Check(newValue, availableBanknotes, newMaximumBanknote);
         }
 
         public static void Main()
