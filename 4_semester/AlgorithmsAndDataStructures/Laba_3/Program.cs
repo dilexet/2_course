@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 
 namespace Laba_3
 {
-    internal class Program
+    static class Program
     {
-        // получаем купюры покупателя
+        private static int _curValue;
+        
         private static int[] GetA()
         {
             Console.Write("N = ");
@@ -21,8 +21,7 @@ namespace Laba_3
 
             return a;
         }
-
-        // получаем купюры продавца
+        
         private static int[] GetB()
         {
             Console.Write("M = ");
@@ -36,8 +35,7 @@ namespace Laba_3
 
             return b;
         }
-
-        // купюры продавца и покупателя вместе
+        
         private static int[] GetC(int[] a, int[] b)
         {
             List<int> c = new List<int>();
@@ -46,33 +44,60 @@ namespace Laba_3
             return c.OrderBy(i => i).ToArray();
         }
 
-        public static void Main()
+        private static bool Check(int value, int[] array, int cur)
         {
-            // var a = GetA();
-            // var b = GetB();
-            int[] a = {3, 5, 6, 3, 8};
-            int[] b = {3, 9, 6, 3, 5};
-            var c = GetC(a, b);
-            int s = 0;
-            int p = 0;
-            int i = 0;
-            while (i <= a.Length && c[i] <= s + 1)
-            {
-                s = s + c[i];
-                i = i + 1;
-            }
+            int nMax = array.ToList().LastOrDefault(x => x < cur);
 
-            if (s < a.Length)
+            int item = value / cur;
+            if (item == 0)
             {
-                foreach (var item in a)
+                if (nMax == 0)
                 {
-                    p += item;
+                    var newArr = array.ToList().Where(x => x < array[array.Length - 1]).ToArray();
+                    if (newArr.Length > 0)
+                    {
+                        return Check(_curValue, newArr, newArr[newArr.Length - 1]);
+                    }
+
+                    return false;
                 }
 
-                p -= s;
+                return Check(value, array, nMax);
             }
 
-            Console.WriteLine("RESULT = " + p);
+            int newValue;
+            int count = array.Count(x => x == cur);
+            if (item >= count)
+            {
+                newValue = value - cur * count;
+            }
+            else
+            {
+                newValue = value - cur * item;
+            }
+
+            if (newValue == 0) return true;
+            if (nMax == 0) return false;
+            return Check(newValue, array, nMax);
+        }
+
+        public static void Main()
+        {
+            var a = GetA();
+            var b = GetB();
+            var c = GetC(a, b);
+            int p = a.ToList().Sum();
+            while (p >= 0)
+            {
+                _curValue = p;
+                if (!Check(p, c, c[c.Length - 1]))
+                {
+                    Console.WriteLine("Buyer's banknotes amount - " + a.ToList().Sum());
+                    Console.WriteLine("We can't give change at a price of - " + p);
+                    break;
+                }
+                p--;
+            }
         }
     }
 }
