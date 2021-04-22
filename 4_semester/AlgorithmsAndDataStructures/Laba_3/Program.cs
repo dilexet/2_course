@@ -6,7 +6,7 @@ namespace Laba_3
 {
     static class Program
     {
-        private static int _curValue;
+        private static int _curValue = 0;
         
         private static int[] GetA()
         {
@@ -94,16 +94,16 @@ namespace Laba_3
             var b = GetB();
             var c = GetC(a, b);
             int p = a.ToList().Sum();
-            while (p >= 0)
+            int i = 1;
+            while (i <= p)
             {
-                _curValue = p;
-                if (!Check(p, c, c[c.Length - 1]))
+                if (!Check(i, c, c[c.Length - 1]))
                 {
                     Console.WriteLine("Buyer's banknotes amount - " + a.ToList().Sum());
-                    Console.WriteLine("We can't give change at a price of - " + p);
+                    Console.WriteLine("We can't give change at a price of - " + (p - i));
                     break;
                 }
-                p--;
+                i++;
             }
         }
     }
