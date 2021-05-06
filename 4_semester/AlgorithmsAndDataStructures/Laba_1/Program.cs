@@ -8,37 +8,31 @@ namespace Laba_1
         public static void Main(string[] args)
         {
             int n;
-            do
-            {
-                Console.Write("Введите кол-во чёрных карточек (1<=N<=50): ");
-                n = Convert.ToInt32(Console.ReadLine());
-            } while (n > 50 || n < 1);
+            Console.Write("Введите кол-во чёрных карточек (1<=N<=50): ");
+            n = Convert.ToInt32(Console.ReadLine());
 
             int[] black = new int[n];
             int[] red = new int[n];
             
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++) // O(N)
             {
                 black[i] = i + 1;
             }
             
             Console.WriteLine("Введите числа красных карточек: ");
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++) // O(N)
             {
                 int item;
-                do
-                {
-                    item = Convert.ToInt32(Console.ReadLine());
-                } while (item > n || item < 1);
+                item = Convert.ToInt32(Console.ReadLine());
                 red[i] = item;
             }
             Console.Write("\nЧёрные карточки:\t");
-            foreach (var item in black)
+            foreach (var item in black) // O(N)
             {
                 Console.Write(item + " ");
             }
             Console.Write("\nКрасные карточки:\t");
-            foreach (var item in red)
+            foreach (var item in red) // O(N)
             {
                 Console.Write(item + " ");
             }
@@ -46,7 +40,7 @@ namespace Laba_1
             int count = 0;
             List<int> result = new List<int>();
             
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++) // O(N*N)
             {
                 for (int j = 0; j < n; j++)
                 {
@@ -62,7 +56,7 @@ namespace Laba_1
             }
             Console.WriteLine($"\nВ выбраном множестве {count} элементов");
             Console.Write("Черные номера выбраных карточек:\t");
-            foreach (var item in result)
+            foreach (var item in result) // O(N)
             {
                 Console.Write(item + " ");
             }
